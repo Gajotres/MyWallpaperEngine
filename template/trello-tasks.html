@@ -1,0 +1,12 @@
+<div class="tasks-container">
+	<h1 class="tasks-title">Tasks</h1>
+	<div class="tasks" data-ng-repeat="task in tasks">
+		<div class="task-time">
+			<div ng-if="!task.closed" class="task-item">{{ formatdate(task.due) }}</div>
+			<div ng-if="!task.closed" class="task-item">{{ formatdateoftheweek(task.due) }}</div>
+		</div>
+		<div class="task-description">
+			<div ng-if="!task.closed" class="task-item">{{ task.name }}</div>
+		</div>
+	</div>	
+</div>

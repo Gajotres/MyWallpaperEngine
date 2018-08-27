@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wallpaper Engine</title>
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-sanitize.min.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/constants.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/fonts.css">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body data-ng-app="Demo" data-ng-controller="googleCtrl">
+
+  <week-weather></week-weather>
+
+  <digital-clock></digital-clock>
+
+  <google-calendar gc-config="demo"></google-calendar>
+
+  <trello-tasks></trello-tasks>
+
+</body>
+</html>

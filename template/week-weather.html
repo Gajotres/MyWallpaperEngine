@@ -1,0 +1,77 @@
+<div class="weather-container">
+	<div class="icon" data-ng-repeat="day in forcast">
+		<div class="card-container" ng-if="day.weather == 'Clouds'">
+			<div class="day-title">{{ day.day }}</div>
+			<div class="day-temp">
+				<div class="day-temp-min">{{ day.min_temp }}</div>
+				<div class="day-temp-max">{{ day.max_temp }}</div>
+			</div>		
+			<div class="cloud-group">
+				<span class="icon-cloud cloud-circle shadow-cloud-clip"></span>
+				<span class="icon-cloud cloud-base shadow-cloud-clip"></span>
+			</div>
+		</div>			
+
+		<div class="card-container" ng-if="day.weather == 'Mixed'">
+			<div class="day-title">{{ day.day }}</div>
+			<div class="day-temp">
+				<div class="day-temp-min">{{ day.min_temp }}</div>
+				<div class="day-temp-max">{{ day.max_temp }}</div>				
+			</div>
+			<div class="cloud-group">
+				<div class="sun-group">
+					<span class="icon-cloud sun"></span>
+					<span class="icon-cloud sunshine"></span>
+				</div>
+				<span class="icon-cloud cloud-circle shadow-cloud-clip"></span>
+				<span class="icon-cloud cloud-base shadow-cloud-clip"></span>
+			</div>
+		</div>
+
+		<div class="card-container" ng-if="day.weather == 'Clear'">
+			<div class="day-title">{{ day.day }}</div>
+			<div class="day-temp">
+				<div class="day-temp-min">{{ day.min_temp }}</div>
+				<div class="day-temp-max">{{ day.max_temp }}</div>				
+			</div>
+			<div class="cloud-group">
+				<div class="sun-group">
+					<span class="icon-cloud sun"></span>
+					<span class="icon-cloud sunshine"></span>
+					<span class="icon-cloud sunshine2"></span>
+					<span class="icon-cloud sunshine3"></span>
+				</div>
+			</div>
+		</div>			
+
+		<div class="card-container" ng-if="day.weather == 'Rain'">
+			<div class="day-title">{{ day.day }}</div>
+			<div class="day-temp">
+				<div class="day-temp-min">{{ day.min_temp }}</div>
+				<div class="day-temp-max">{{ day.max_temp }}</div>				
+			</div>
+			<div class="cloud-group">
+				<span class="icon-cloud cloud-circle shadow-cloud-clip"></span>
+				<span class="icon-cloud cloud-base shadow-cloud-clip"></span>
+				<div class="rain-group">
+					<span class="icon-cloud rain"></span>
+				</div>
+			</div>
+		</div>	
+
+		<div class="card-container" ng-if="day.weather == 'Snow'">
+			<div class="day-title">{{ day.day }}</div>
+			<div class="day-temp">
+				<div class="day-temp-min">{{ day.min_temp }}</div>
+				<div class="day-temp-max">{{ day.max_temp }}</div>
+			</div>
+			<div class="cloud-group">
+				<span class="icon-cloud cloud-circle shadow-cloud-clip"></span>
+				<span class="icon-cloud cloud-base shadow-cloud-clip"></span>
+				<span class="icon-cloud snowflake"></span>  
+				<span class="icon-cloud snowflake2"></span>
+				<span class="icon-cloud snowflake3"></span>    
+			</div>
+		</div>			
+	</div>	
+</div>	

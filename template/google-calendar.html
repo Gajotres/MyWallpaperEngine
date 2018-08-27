@@ -1,0 +1,17 @@
+<div class="calendar-container">
+	<h1 data-ng-if="gcConfig.calendar_name" class="calendar-title">Agenda</h1>
+	<div class="events" data-ng-repeat="event in calendar.items">
+		<div class="event-time">
+			<div class="datetime">
+				<div>{{ startDate(event) }}</div>
+				<div class="event-period">{{ formatDate(event) }}</div>
+			</div>			
+		</div>
+		<div class="event-descriptions">
+			<div class="event-title">{{ ::event.summary }}</div>
+			<div class="event-period">{{ formatPeriod(event) }}</div>
+			<div class="description" data-ng-if="gcConfig.sanitize && gcConfig.htmlDesc" data-ng-bind-html="event.description"></div>
+			<div class="description" data-ng-if="!(gcConfig.sanitize && gcConfig.htmlDesc)">{{ event.description }}</div>			
+		</div>		
+	</div>
+</div>

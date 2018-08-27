@@ -1,0 +1,442 @@
+  /* Default */
+
+  html, body { 
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;     
+    background-color: rgb(25,35,45); 
+  }
+
+  /* Week Weather */
+
+  .weather-container {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)    
+    margin: auto;
+    overflow: visible;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  .card,
+  .icon,
+  .cloud-group,
+  .sun-group,
+  .rain-group{
+    position: relative;
+  }
+  .box-highlight{
+    padding: 8px 4px;
+    background-color: #3B444C;
+    background-color: rgba(255,255,255,.15);
+    text-shadow: 0 5px 5px rgb(25,35,45);
+  }
+
+  .icon{
+    margin-top: 50px;
+    margin-right: 30px;
+    display:flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  /* CLOUDLY */
+
+  .cloud-group{
+    width: 120px;
+    height: 106px;
+  }
+  .icon-cloud{
+    position: absolute;
+    background-color: white;
+    display: block;
+  }
+  .shadow-cloud-clip{
+    box-shadow: 2px -6px 0 rgb(25,35,45);
+  }
+  .cloud-base{
+    top: 27px;
+    left: 0;
+    width: 100%;
+    height: 45px;
+    border-radius: 40px;
+    z-index: 1;
+  }
+  .cloud-circle{
+    top: 0;
+    left: 15px;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    z-index: 2;
+  }
+  .cloud-circle::after{
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 46px;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: inherit;
+    box-shadow: 1px -6px 0 rgb(25,35,45);
+
+  }
+
+  /* SUNNY */
+
+  .sun {
+    top: 15px;
+    left: 29px;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+  }
+  .sun-partial {
+    top: -12px;
+    left: 53px;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+  }
+  .sunshine-partial,
+  .sunshine-partial::before,
+  .sunshine-partial::after,
+  .sunshine,
+  .sunshine::before,
+  .sunshine::after,
+  .sunshine2,
+  .sunshine2::before,
+  .sunshine2::after,
+  .sunshine3,
+  .sunshine3::before,
+  .sunshine3::after,
+  .snowflake,
+  .snowflake::before,
+  .snowflake::after,
+  .snowflake2,
+  .snowflake2::before,
+  .snowflake2::after,
+  .snowflake3,
+  .snowflake3::before,
+  .snowflake3::after {
+    position: absolute;
+    width: 18px;
+    height: 8px;
+    border-radius: 8px;
+    background: #fff !important;
+  }
+
+  .sunshine-partial {
+    top: 17px;
+    right: -17px;
+  }
+  .sunshine {
+    top: 45px;
+    left: 95px;
+  }
+  .sunshine2 {
+    top: 43px;
+    left: 5px;
+  }
+  .sunshine3 {
+    top: 12px;
+    left: 15px;
+    transform: rotate(45deg);
+  }
+  .sunshine-partial::before,
+  .sunshine-partial::after,
+  .sunshine::before,
+  .sunshine::after,
+  .rain::before,
+  .rain::after,
+  .sunshine2::before,
+  .sunshine2::after,
+  .sunshine3::before,
+  .sunshine3::after,
+  .snowflake,
+  .snowflake::after,
+  .snowflake::before,
+  .snowflake2,
+  .snowflake2::after,
+  .snowflake2::before,
+  .snowflake3,
+  .snowflake3::after,
+  .snowflake3::before {
+    content: "";
+    background-color: inherit;
+  }
+  .sunshine-partial::before{
+    top: -48px;
+    right: 45px;
+    transform: rotate(-90deg);
+  }
+  .sunshine-partial::after{
+    top: -33px;
+    right: 11px;
+    transform: rotate(-45deg);
+  }
+  .sunshine::before{
+    top: -48px;
+    right: 45px;
+    transform: rotate(-90deg);
+  }
+  .sunshine::after{
+    top: -33px;
+    right: 11px;
+    transform: rotate(-45deg);
+  }
+  .sunshine2::before{
+    top: 44px;
+    left: 45px;
+    transform: rotate(-90deg);
+  }
+  .sunshine2::after{
+    top: 32px;
+    left: 16px;
+    transform: rotate(-45deg);
+  }
+  .sunshine3::after{
+    top: -2px;
+    left: 90px;
+    transform: rotate(0deg);
+  }
+
+  /* SNOWING */
+
+  .snowflake {
+    top: 82px;
+    left: 26px;
+    transform: rotate(-45deg);
+  }
+  .snowflake::after {
+    top: 0px;
+    left: 0px;
+    transform: rotate(90deg);
+  }
+
+  .snowflake2 {
+    top: 82px;
+    left: 46px;
+    transform: rotate(-45deg);
+  }
+  .snowflake2::after {
+    top: 0px;
+    left: 0px;
+    transform: rotate(90deg);
+  }
+
+  .snowflake3 {
+    top: 82px;
+    left: 66px;
+    transform: rotate(-45deg);
+  }
+  .snowflake3::after {
+    top: 0px;
+    left: 0px;
+    transform: rotate(90deg);
+  }
+
+  /* RAINING */
+  .rain {
+    left: 0;
+    bottom: -86px;
+    transform: rotate(-75deg);
+  }
+  .rain,
+  .rain::before,
+  .rain::after{
+    position: absolute;
+    width: 40px;
+    height: 8px;
+    border-radius: 8px;
+    box-shadow: 2px 0 0 4px rgb(25,35,45);
+    z-index: 2;
+  }
+  .rain::before{
+    left: 9px;
+    bottom: -35px
+  }
+  .rain::after{
+    right: -18px;
+    bottom: -69px
+  }
+
+  .day-temp {
+    margin-bottom: 20px;
+    height: 40px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 22px;
+    color: #fff;
+    text-shadow: 2px 2px 1px #000;
+  }
+  .day-temp-min, .day-temp-max {
+    display: inline-block;
+    width: 47%;
+    height: 100%;
+    background-color: #3b444c;
+    line-height: 40px;
+    text-align: center;
+  }
+  .day-temp-min::after, .day-temp-max::after {
+    content: "\00B0";
+  }
+  .day-title{
+    margin-bottom: 5px;
+    width: 100%;
+    height: 40px;
+    color: rgb(200,200,200);
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    border-bottom: 1px solid rgb(200,200,200); 
+    line-height: 40px;
+    text-align: center;         
+  }
+
+
+  /* Trello Tasks */
+
+  .tasks {
+    margin-bottom: 10px;   
+  }
+
+  .tasks-container {
+    position: absolute;
+    top: 50%;
+    left: 20px;    
+    width: 430px;  
+    transform: translateY(-50%);
+  }
+
+  .task-item {
+    font-size: 14px;
+    font-family: 'Encode Sans Condensed', sans-serif;
+    color: #C7CDD1;
+    text-shadow: 1px 1px 0px #000;    
+  }
+
+  .task-time .task-item {
+    color: #FFF;
+  }
+
+  .task-description {
+   margin-left: 5px !important;
+   border-left: 0 solid transparent !important;
+ }  
+
+ /* Google Calendar */
+
+ .calendar-container {
+  position: absolute;
+  top: 50%;
+  right: 20px;    
+  width: 430px;  
+  transform: translateY(-50%); 
+  font-family: 'Encode Sans Condensed', sans-serif;
+  color: #fff;
+  text-shadow: 1px 1px 0px #000;    
+}
+.calendar-title, .tasks-title {
+  font-family: 'Ubuntu', sans-serif;
+  margin-left: 105px;
+  color: #fff;
+}
+.events {
+  margin-bottom: 20px;
+}
+.event-title, .event-time {
+  font-size: 14px;
+} 
+.event-title {
+  font-weight: bold;
+  color: rgb(200,200,200);
+}
+.event-time, .task-time {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  vertical-align: top;
+  font-style: italic;
+}
+.event-descriptions, .task-description {
+  display: inline-block;
+  width: 290px;
+  margin-left: 10px;
+  padding-left: 12px;
+  border-left: 5px solid #7986CB;
+  vertical-align: top;
+  color: #C7CDD1;    
+}
+.event-period {
+  font-size: 12px;
+}
+.datetime {
+  color: #fff;
+}
+.description {
+  color: #fff;
+}
+
+
+/* Digital clock */
+
+.clock-container {
+  margin: auto;    
+  width: 600px;
+  height: 100%;      
+  text-align: center;
+  color: rgba(224, 230, 235, 0.89);
+  font-family: 'Audiowide', cursive;
+  font-weight: 300;
+  overflow: hidden;    
+}
+
+.column,
+.colon {
+  display: inline-block;    
+  vertical-align: top;
+  font-size: 86px;
+  line-height: 86px;
+}
+
+.column {
+  transition: -webkit-transform 300ms;
+  transition: transform 300ms;
+  transition: transform 300ms, -webkit-transform 300ms;
+}
+
+.colon {
+  transition: -webkit-transform 300ms;
+  transition: transform 300ms;
+  transition: transform 300ms, -webkit-transform 300ms;
+  -webkit-transform: translateY(calc(50vh - 43px));
+  transform: translateY(calc(50vh - 43px));
+}
+.colon:after {
+  content: ':';
+}
+
+.num {
+  transition: opacity 500ms, text-shadow 100ms;
+  opacity: 0.025;
+}
+.num.visible {
+  opacity: 1.0;
+  text-shadow: 1px 1px 0px #000;
+}
+.num.close {
+  opacity: 0.15;
+}
+.num.far {
+  opacity: 0.075;
+}
+.num.distant {
+  opacity: 0.02;
+}
