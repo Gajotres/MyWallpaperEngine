@@ -66,7 +66,7 @@ angular.module('GoogleCalendar', []).directive('googleCalendar', function(){
       };    
 
       $scope.formatPeriod = function(event) {
-        return $scope.sameDay(event.start.date, event.end.date) ? "ALL DAY" : $scope.start + " - " + $scope.end;
+        return $scope.sameDay(event.start.date, event.end.date) ? "ALL DAY" : event.start.date + " - " + event.end.date;
       };
 
       $scope.formatDate = function(event) {
@@ -160,7 +160,7 @@ angular.module('DigitalClock', []).directive('digitalClock', function($interval)
 
       $scope.c = null;
       $scope.d = null;
-      $scope.classList = ['visible', 'close', 'far', 'far', 'distant', 'distant'];
+      $scope.classList = ['visible', 'close', 'far', 'distant', 'distant', 'distant'];
       $scope.use24HourClock = true;
       $scope.size = 86;
       $scope.columns = Array.from(document.getElementsByClassName('column'));
