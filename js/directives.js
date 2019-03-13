@@ -33,6 +33,7 @@ angular.module('GoogleCalendar', []).directive('googleCalendar', function(){
         hideTitle: false,
         sanitize: sanitize,
         dateTimeFilter: 'd. MMM HH.mm',
+		dateTimeFilterLong: 'd.MM.yyyy HH.mm',
         dateFilter: 'dd MMM',
         shortDateFilter: 'EEE',
         htmlDesc: false,
@@ -51,7 +52,11 @@ angular.module('GoogleCalendar', []).directive('googleCalendar', function(){
 
       formatDateFilter = function(date) {
         return $filter('date')(date, $scope.gcConfig.shortDateFilter);
-      };      
+      };
+	  
+      dateTimeDateFilter = function(date) {
+        return $filter('date')(date, $scope.gcConfig.dateTimeFilterLong);
+      };	  
 
       $scope.sameDay = function(date1, date2) {
         $scope.date1 = new Date(date1);
@@ -66,7 +71,7 @@ angular.module('GoogleCalendar', []).directive('googleCalendar', function(){
       };    
 
       $scope.formatPeriod = function(event) {
-        return $scope.sameDay(event.start.date, event.end.date) ? "ALL DAY" : event.start.date + " - " + event.end.date;
+        return $scope.sameDay(event.start.date, event.end.date) ? "ALL DAY" : dateTimeDateFilter(event.start.dateTime) + " - " + dateTimeDateFilter(event.end.dateTime);
       };
 
       $scope.formatDate = function(event) {
@@ -102,6 +107,7 @@ angular.module('GoogleCalendar', []).directive('googleCalendar', function(){
       var url = "https://www.googleapis.com/calendar/v3/calendars/" + $scope.gcConfig.calendar_id + "/events?orderBy=startTime&singleEvents=true&timeMin=" + (new Date().toISOString()) + "&maxResults=" + $scope.gcConfig.max + "&key=" + $scope.gcConfig.google_key;
 
       $http.get(url).success(function(data){
+		  console.log(data);
         $scope.calendar = data;
         if (!$scope.gcConfig.hideTitle && !$scope.gcConfig.calendar_name)
           angular.extend($scope.gcConfig, { calendar_name: data.summary })
