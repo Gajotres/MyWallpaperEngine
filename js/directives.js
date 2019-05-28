@@ -106,12 +106,14 @@ angular.module('GoogleCalendar', []).directive('googleCalendar', function(){
 
       var url = "https://www.googleapis.com/calendar/v3/calendars/" + $scope.gcConfig.calendar_id + "/events?orderBy=startTime&singleEvents=true&timeMin=" + (new Date().toISOString()) + "&maxResults=" + $scope.gcConfig.max + "&key=" + $scope.gcConfig.google_key;
 
-      $http.get(url).success(function(data){
-		  console.log(data);
-        $scope.calendar = data;
-        if (!$scope.gcConfig.hideTitle && !$scope.gcConfig.calendar_name)
-          angular.extend($scope.gcConfig, { calendar_name: data.summary })
-      });
+      $window.addEventListener("online", function() {
+        $http.get(url).success(function(data){
+  		    console.log(data);
+          $scope.calendar = data;
+          if (!$scope.gcConfig.hideTitle && !$scope.gcConfig.calendar_name)
+            angular.extend($scope.gcConfig, { calendar_name: data.summary })
+        });
+      }, false);
     }]
   };
 });
@@ -137,15 +139,17 @@ angular.module('TrelloTasks', []).directive('trelloTasks', function(RestHandler,
       };       
 
       $scope.getTasks = function() {
-        RestHandler.getTasks(function (tasks) {
+        $window.addEventListener("online", function() {
+          RestHandler.getTasks(function (tasks) {
 
-          /* Sort array by date */
-          tasks.sort(function(a,b) { 
-            return new Date(a.due).getTime() - new Date(b.due).getTime() 
+            /* Sort array by date */
+            tasks.sort(function(a,b) { 
+              return new Date(a.due).getTime() - new Date(b.due).getTime() 
+            });
+
+            $scope.tasks = tasks;
           });
-
-          $scope.tasks = tasks;
-        });
+        }, false);
       } 
 
       $interval(function () {
@@ -214,42 +218,44 @@ angular.module('WeekWeather', []).directive('weekWeather', function(RestHandler,
 
         $scope.forcast = [];
 
-        RestHandler.getWeather(function (weather) {
+        $window.addEventListener("online", function() {
+          RestHandler.getWeather(function (weather) {
 
-          var days = [], output = [], i;
-          for( i = 0; i < weather.list.length; i++) {
-            var weekDay = weather.list[i].dt_txt.substr(0, 10);
-            if( days[weekDay]) continue;
-            days[weekDay] = true;
-            output.push(weekDay);
-          }
-
-          angular.forEach(output, function(day, j) {
-
-            var dayOutput = {
-              'day' : day,
-              'max_temp' : '',
-              'min_temp' : '',
-              'weather' : ''
+            var days = [], output = [], i;
+            for( i = 0; i < weather.list.length; i++) {
+              var weekDay = weather.list[i].dt_txt.substr(0, 10);
+              if( days[weekDay]) continue;
+              days[weekDay] = true;
+              output.push(weekDay);
             }
 
-            angular.forEach(weather.list, function(el, k) {
-              if(day == el.dt_txt.substr(0, 10)) {
-                var time = el.dt_txt.substr(11, 16);
-                if(time == "15:00:00") {
-                  dayOutput.max_temp = Math.round(el.main.temp);
-                  dayOutput.weather  = el.weather[0].main
-                } else if (time = "03:00:00") {
-                  dayOutput.min_temp = Math.round(el.main.temp);
-                }
+            angular.forEach(output, function(day, j) {
+
+              var dayOutput = {
+                'day' : day,
+                'max_temp' : '',
+                'min_temp' : '',
+                'weather' : ''
               }
-            });
 
-            $scope.forcast.push(dayOutput);
+              angular.forEach(weather.list, function(el, k) {
+                if(day == el.dt_txt.substr(0, 10)) {
+                  var time = el.dt_txt.substr(11, 16);
+                  if(time == "15:00:00") {
+                    dayOutput.max_temp = Math.round(el.main.temp);
+                    dayOutput.weather  = el.weather[0].main
+                  } else if (time = "03:00:00") {
+                    dayOutput.min_temp = Math.round(el.main.temp);
+                  }
+                }
+              });
 
-          });          
+              $scope.forcast.push(dayOutput);
 
-        });
+            });          
+
+          });
+        }, false);
       } 
 
       $interval(function () {
